@@ -26,6 +26,108 @@
       "flags": "s",
       "fix": "\"invalid schema indexes\" means one or more fields failed their sub-schema. Check: \"permissions\" must only list API names (\"<all_urls>\" belongs in \"host_permissions\"); \"host_permissions\" must be an array of match patterns, not a single string; \"icons\" keys must be numeric strings (\"16\", \"48\", \"128\"); every \"matches\" / \"include_globs\" / \"exclude_globs\" must be an array. Validate your manifest against the Chrome MV3 JSON schema before re-submitting.",
       "createdAt": "2026-04-23T00:00:02Z"
+    },
+    {
+      "id": "custom.chrome.violation.yellowPotassium",
+      "browser": "chrome",
+      "failureMessage": "Violation reference ID: Yellow Potassium",
+      "fix": "Yellow Potassium = minimum functionality. The reviewer found the extension too simple, broken, or indistinguishable from a bookmark. Add real standalone value (settings UI, keyboard shortcuts, multi-step workflow), remove placeholder screens, and rewrite the store description to explain why it's more than a shortcut.",
+      "createdAt": "2026-04-23T00:00:03Z"
+    },
+    {
+      "id": "custom.chrome.violation.purplePotassium",
+      "browser": "chrome",
+      "failureMessage": "Violation reference ID: Purple Potassium",
+      "pattern": "\"permissions\"\\s*:\\s*\\[[^\\]]*\"(?:tabs|history|cookies|management|debugger|downloads|proxy|webRequest|webRequestBlocking|declarativeNetRequestFeedback|privacy|contentSettings|bookmarks|topSites|identity|nativeMessaging)\"",
+      "flags": "s",
+      "fix": "Purple Potassium = excessive permissions. Every permission must be justified in the store listing's Permission Justification fields AND actively used in code. Remove unused permissions; for the remainder, add a one-sentence justification tied to a specific feature. Prefer \"activeTab\" over \"tabs\" when possible, and declarativeNetRequest over webRequest.",
+      "createdAt": "2026-04-23T00:00:04Z"
+    },
+    {
+      "id": "custom.chrome.violation.yellowLithium",
+      "browser": "chrome",
+      "failureMessage": "Violation reference ID: Yellow Lithium",
+      "fix": "Yellow Lithium = Spam. Common triggers: (1) the store description / title contains keyword-stuffed lists, (2) multiple near-identical listings from the same developer, (3) repetitive installs of the same extension under different skins. De-duplicate listings, rewrite the description as prose, and remove non-functional keyword dumps.",
+      "createdAt": "2026-04-23T00:00:05Z"
+    },
+    {
+      "id": "custom.chrome.violation.goldMagnesium",
+      "browser": "chrome",
+      "failureMessage": "Violation reference ID: Gold Magnesium",
+      "fix": "Gold Magnesium = deceptive installation or behavior. Typically cited when the extension surprises the user (injects ads, opens tabs, changes search/new tab) without clear opt-in inside the extension UI. Add an unmistakable first-run consent screen, never auto-enable surprising behaviors, and document every side effect in the listing.",
+      "createdAt": "2026-04-23T00:00:06Z"
+    },
+    {
+      "id": "custom.chrome.violation.purpleInkberry",
+      "browser": "chrome",
+      "failureMessage": "Violation reference ID: Purple Inkberry",
+      "pattern": "\"name\"\\s*:\\s*\"[^\"]{0,132}(?:for\\s+ChatGPT|for\\s+YouTube|for\\s+Gmail|for\\s+Google|for\\s+Facebook|for\\s+Amazon|for\\s+Netflix)[^\"]*\"",
+      "flags": "i",
+      "fix": "Purple Inkberry = misleading trademarks / metadata. Extensions cannot imply endorsement by a third party. Remove trademarked brand names from the extension name (ok in description with disclaimer), use your own branding, and add \"Not affiliated with <Trademark>\" where reasonable.",
+      "createdAt": "2026-04-23T00:00:07Z"
+    },
+    {
+      "id": "custom.chrome.violation.unusedPermission",
+      "browser": "chrome",
+      "failureMessage": "Requesting but not using the following permission(s)",
+      "pattern": "\"permissions\"\\s*:\\s*\\[[^\\]]*\"(?:tabs|bookmarks|history|cookies|downloads|identity|notifications|alarms|idle|clipboardRead|clipboardWrite|contextMenus|sidePanel|management)\"",
+      "flags": "s",
+      "fix": "The reviewer detected a permission declared in manifest.json that never appears in any code path. Either (1) remove the unused permission, or (2) add the API call (e.g. chrome.tabs.query, chrome.bookmarks.getTree, chrome.cookies.get) in a code path that actually executes. Re-run static search with grep/rg to confirm each permission is genuinely exercised.",
+      "createdAt": "2026-04-23T00:00:08Z"
+    },
+    {
+      "id": "custom.firefox.dataCollectionPermissions",
+      "browser": "firefox",
+      "failureMessage": "Add-on does not declare data_collection_permissions (Firefox 140+)",
+      "pattern": "\"browser_specific_settings\"\\s*:\\s*\\{(?:(?!\"data_collection_permissions\").)*\\}",
+      "flags": "s",
+      "fix": "Firefox 140+ requires the built-in data-consent manifest. Under browser_specific_settings.gecko, add a \"data_collection_permissions\" object per the Firefox add-on data classification taxonomy (e.g. { \"required\": [\"technicalAndInteraction\"], \"optional\": [\"locationInfo\"] }) - or explicitly declare { \"required\": [\"none\"] } if you collect nothing. See https://extensionworkshop.com/documentation/develop/firefox-builtin-data-consent/",
+      "createdAt": "2026-04-23T00:00:09Z"
+    },
+    {
+      "id": "custom.firefox.obfuscatedCode",
+      "browser": "firefox",
+      "failureMessage": "Add-ons are not allowed to contain obfuscated code",
+      "pattern": "var\\s+_0x[a-f0-9]{3,}\\s*=\\s*\\[|eval\\s*\\(function\\s*\\(p,a,c,k,e|String\\.fromCharCode\\.apply\\s*\\(\\s*null\\s*,\\s*\\[(?:\\s*\\d+\\s*,\\s*){20,}",
+      "flags": "g",
+      "fix": "AMO distinguishes minification (allowed) from obfuscation (banned). Remove packed string arrays (var _0x...=[]), P-A-C-K-E-R output (eval(function(p,a,c,k,e..., and large String.fromCharCode arrays. Ship normal minified output (terser without name mangling for module exports) and submit the original source via the source-code form.",
+      "createdAt": "2026-04-23T00:00:10Z"
+    },
+    {
+      "id": "custom.firefox.consentMissable",
+      "browser": "firefox",
+      "failureMessage": "Consent experience is not unmissable (popup window rejection)",
+      "pattern": "chrome\\.windows\\.create\\s*\\(\\s*\\{[^}]*\"type\"\\s*:\\s*\"popup\"|browser\\.windows\\.create\\s*\\(\\s*\\{[^}]*type\\s*:\\s*['\"]popup",
+      "flags": "g",
+      "fix": "Mozilla explicitly rejects data-consent dialogs presented as popup windows because they can be missed or hidden. Present consent in a focused new tab (chrome.tabs.create) on install, include all options on a single page, and never use multi-step decline flows or reduced-contrast fonts.",
+      "createdAt": "2026-04-23T00:00:11Z"
+    },
+    {
+      "id": "custom.firefox.cryptoMiner",
+      "browser": "firefox",
+      "failureMessage": "Cryptocurrency mining is prohibited",
+      "pattern": "coinhive|cryptonight|coin-hive|coinimp|webassembly_miner|crypto-miner|minero\\.cc|miningpool|nicehash|xmrig",
+      "flags": "gi",
+      "fix": "AMO bans cryptocurrency miners outright - there is no opt-in exception. Remove every miner library (Coinhive, CryptoNight, CoinIMP, miner.js, etc.) and any WebAssembly module performing hash computations, then re-submit.",
+      "createdAt": "2026-04-23T00:00:12Z"
+    },
+    {
+      "id": "custom.firefox.affiliateInjection",
+      "browser": "firefox",
+      "failureMessage": "Modifying web content to include affiliate promotion tags is not permitted",
+      "pattern": "\\.replace\\s*\\(\\s*/[^/]*amazon[^/]*/[^,]*,\\s*['\"][^'\"]*tag=|location\\.href\\s*=\\s*[`'\"][^`'\"]*(?:\\?|&)(?:tag|aff|affid|partner|ref_|refcode)=",
+      "flags": "gi",
+      "fix": "Injecting affiliate codes into links the user is already clicking on (Amazon ?tag=, eBay ?mpre=, etc.) is a hard-rejection on AMO. Affiliate revenue is only allowed when the link appears inside UI clearly owned by the extension (options page, popup button), not when it rewrites third-party page content.",
+      "createdAt": "2026-04-23T00:00:13Z"
+    },
+    {
+      "id": "custom.safari.otherBrowserMentions",
+      "browser": "safari",
+      "failureMessage": "Metadata references other browsers or platforms (2.3.10)",
+      "pattern": "\\b(?:Chrome|Chromium|Firefox|Mozilla|Brave|Opera|Vivaldi|Android|Google\\s+Play)\\b",
+      "flags": "gi",
+      "fix": "App Store guideline 2.3.10 bans references to competing platforms. Strip Chrome/Firefox/etc. from screenshots, description, What's New, in-app strings, and website bundle. Replace \"Available on Chrome\" text with \"Also available on other browsers\" without naming them.",
+      "createdAt": "2026-04-23T00:00:14Z"
     }
   ]
 }
