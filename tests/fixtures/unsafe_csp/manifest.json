@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Unsafe CSP Extension",
+  "version": "1.0.0",
+  "permissions": ["storage"],
+  "host_permissions": [],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "48": "icons/icon48.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  }
+}

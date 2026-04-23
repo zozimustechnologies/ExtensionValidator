@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "My Legacy Extension",
+  "version": "0.9.0",
+  "description": "A sample MV2 extension for testing.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://example.com/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "web_accessible_resources": ["images/logo.png"],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "legacy@example.com",
+      "strict_min_version": "68.0"
+    }
+  }
+}
