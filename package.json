@@ -1,6 +1,6 @@
 {
   "name": "zozimus-extension-validator",
-  "displayName": "Zozimus Extension Validator",
+  "displayName": "Browser Extension Validator",
   "description": "Validate browser extension packages against Edge, Chrome, Firefox, and Safari store policies — plus your own custom definitions.",
   "version": "0.1.0",
   "publisher": "zozimustechnologies",
@@ -15,7 +15,7 @@
       "activitybar": [
         {
           "id": "zozimusValidator",
-          "title": "Zozimus Extension Validator",
+          "title": "Browser Extension Validator",
           "icon": "media/sidebar-icon.svg"
         }
       ]
@@ -27,7 +27,7 @@
           "id": "zozimusValidator.sidebar",
           "name": "Validator",
           "icon": "media/sidebar-icon.svg",
-          "contextualTitle": "Zozimus Extension Validator"
+          "contextualTitle": "Browser Extension Validator"
         }
       ]
     },
@@ -42,7 +42,7 @@
       }
     ],
     "configuration": {
-      "title": "Zozimus Extension Validator",
+      "title": "Browser Extension Validator",
       "properties": {
         "zozimus.refreshIntervalDays": {
           "type": "number",

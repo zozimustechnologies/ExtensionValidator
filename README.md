@@ -1,4 +1,4 @@
-# Zozimus Extension Validator
+# Browser Extension Validator
 
 A VS Code sidebar extension that validates browser-extension packages (`.zip` / `.crx` / `.xpi`) against the published developer policies for **Microsoft Edge Add-ons**, **Chrome Web Store**, **Firefox AMO**, and **Safari Web Extensions**, plus your own custom failure definitions.
 

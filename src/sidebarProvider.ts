@@ -178,7 +178,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 </head>
 <body>
   <header class="zoz-header">
-    <div class="zoz-title">Zozimus Extension Validator</div>
+    <div class="zoz-title">Browser Extension Validator</div>
     <div class="zoz-sub">Edge · Chrome · Firefox · Safari</div>
   </header>
 
@@ -242,7 +242,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       <input id="cust-fix" type="text" placeholder="e.g. Bundle the script locally" />
     </label>
     <button id="btn-add-custom" class="zoz-primary">Add definition</button>
-    <h3>Existing definitions</h3>
+    <h3><a href="#" data-link="https://github.com/zozimustechnologies/ExtensionValidator/blob/main/policies/custom-definitions.json">Existing definitions</a></h3>
     <div id="custom-list"></div>
   </section>
 
