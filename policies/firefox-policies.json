@@ -1,0 +1,453 @@
+{
+  "browser": "firefox",
+  "source": "https://extensionworkshop.com/documentation/publish/add-on-policies/",
+  "lastUpdated": "2026-04-23T00:00:00Z",
+  "policyCount": 40,
+  "policies": [
+    {
+      "id": "firefox.surprises.unexpected",
+      "title": "No Surprises - Unexpected features must be opt-in and disclosed",
+      "category": "ux",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "chrome_settings_overrides",
+          "homepage",
+          "search_provider",
+          "startup_pages"
+        ]
+      },
+      "fix": "Disclose unexpected behaviors in the listing and require an explicit opt-in inside the add-on UI."
+    },
+    {
+      "id": "firefox.content.acceptableUse",
+      "title": "Content - Mozilla Acceptable Use Policy",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Comply with Mozilla's Acceptable Use Policy."
+    },
+    {
+      "id": "firefox.content.disclosePayment",
+      "title": "Content - Listings must disclose required payment",
+      "category": "monetization",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "If functionality requires payment, disclose this in the AMO listing."
+    },
+    {
+      "id": "firefox.content.usLaw",
+      "title": "Content - Must conform to US laws",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Add-on and content must conform to US laws (and may face removal in other jurisdictions where it violates local law)."
+    },
+    {
+      "id": "firefox.content.fork",
+      "title": "Content - Forks must be clearly distinguished and add value",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "If your add-on is a fork, name it distinctly and provide significant new functionality."
+    },
+    {
+      "id": "firefox.content.noPromoOnly",
+      "title": "Content - No promo-only / launcher-only add-ons",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Add-ons whose sole purpose is to promote, install, load, or launch an outside site/app/add-on are not permitted."
+    },
+    {
+      "id": "firefox.content.themeQuality",
+      "title": "Content - Theme image quality requirements",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Themes must use high-quality, properly aligned images. Duplicates and stretched/blank images are rejected."
+    },
+    {
+      "id": "firefox.submission.sourceCode",
+      "title": "Submission - Reviewable source code required",
+      "category": "submission",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Provide unminified source plus build instructions. Dependencies must come from official package managers."
+    },
+    {
+      "id": "firefox.submission.functionalTest",
+      "title": "Submission - Functional testing info & credentials",
+      "category": "submission",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Supply testing instructions and any credentials needed to exercise the add-on."
+    },
+    {
+      "id": "firefox.submission.corrections",
+      "title": "Submission - Corrections must not bundle unrelated changes",
+      "category": "submission",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "When resubmitting after a rejection, only include the requested fixes."
+    },
+    {
+      "id": "firefox.dev.permissionsMinimal",
+      "title": "Development - Request only necessary permissions",
+      "category": "permissions",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "<all_urls>",
+          "tabs",
+          "history",
+          "bookmarks",
+          "downloads",
+          "management"
+        ]
+      },
+      "fix": "Drop permissions you do not actively use; broad host permissions trigger manual review."
+    },
+    {
+      "id": "firefox.dev.selfContained",
+      "title": "Development - Self-contained, no remote code execution",
+      "category": "code",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "eval\\s*\\(|new\\s+Function\\s*\\(|innerHTML\\s*=\\s*['\"`]<script",
+        "flags": "g"
+      },
+      "fix": "Bundle all scripts in the .xpi. Do not load and execute remote code."
+    },
+    {
+      "id": "firefox.dev.noRemoteNewTab",
+      "title": "Development - Must not load/redirect to a remote new tab page",
+      "category": "code",
+      "severity": "error",
+      "check": {
+        "type": "manifestField",
+        "field": "chrome_url_overrides",
+        "mustNotMatch": "https?://"
+      },
+      "fix": "Host the new tab page inside the add-on, not on a remote URL."
+    },
+    {
+      "id": "firefox.dev.noRelaxCsp",
+      "title": "Development - Must not relax web page security headers (CSP)",
+      "category": "security",
+      "severity": "error",
+      "check": {
+        "type": "manifestField",
+        "field": "content_security_policy",
+        "mustNotMatch": "unsafe-eval|unsafe-inline"
+      },
+      "fix": "Do not weaken page CSP. Remove unsafe-eval and unsafe-inline."
+    },
+    {
+      "id": "firefox.dev.encryption",
+      "title": "Development - Use encryption for remote data transport",
+      "category": "security",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "http://(?!localhost|127\\.0\\.0\\.1)",
+        "flags": "g"
+      },
+      "fix": "Use HTTPS for all data transport."
+    },
+    {
+      "id": "firefox.dev.noRedundant",
+      "title": "Development - Avoid redundant code or files",
+      "category": "code",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove unused code, libraries, and assets from the package."
+    },
+    {
+      "id": "firefox.dev.performance",
+      "title": "Development - Must not negatively impact Firefox performance",
+      "category": "performance",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Profile your add-on. Avoid CPU/memory regressions and synchronous heavy work."
+    },
+    {
+      "id": "firefox.dev.thirdPartyLibs",
+      "title": "Development - Only release versions of third-party libraries, unmodified",
+      "category": "code",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Bundle official released library versions only; do not patch them in-place."
+    },
+    {
+      "id": "firefox.dev.noObfuscation",
+      "title": "Development - No obfuscated code",
+      "category": "code",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "_0x[a-f0-9]{4,}|atob\\(\\s*['\"][A-Za-z0-9+/=]{200,}['\"]",
+        "flags": "gi"
+      },
+      "fix": "Mozilla rejects deliberately obfuscated code. Minification is allowed."
+    },
+    {
+      "id": "firefox.userScripts.managerOnly",
+      "title": "User Scripts API - User script managers only",
+      "category": "code",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "userScripts API is reserved for user-script-manager add-ons that let users install/manage scripts."
+    },
+    {
+      "id": "firefox.data.noSearchInterception",
+      "title": "Data - No search-term interception or transmission",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not transmit search terms or intercept searches going to a third-party search provider."
+    },
+    {
+      "id": "firefox.data.noAncillary",
+      "title": "Data - No transmission of ancillary information",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Only transmit data required for your stated functionality."
+    },
+    {
+      "id": "firefox.data.browsingActivity",
+      "title": "Data - Browsing activity only as primary function",
+      "category": "privacy",
+      "severity": "warning",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "tabs\\.query|webNavigation|webRequest|history\\.search",
+        "flags": "g"
+      },
+      "fix": "Transmission of browsing activity is only permitted as part of the stated primary function."
+    },
+    {
+      "id": "firefox.consent.builtInTaxonomy",
+      "title": "Data Consent (Firefox >=140) - Use built-in classification taxonomy",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "If using Firefox's built-in data consent UI, declare your data classifications accurately in the manifest."
+    },
+    {
+      "id": "firefox.consent.explicit",
+      "title": "Data Consent (Firefox <=139) - Unmissable in-add-on consent UI",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Provide an unmissable, single-page consent UI immediately after install. No deceptive design patterns."
+    },
+    {
+      "id": "firefox.consent.personalOptIn",
+      "title": "Data Consent - Personal Data is opt-in",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Personal data must be transmitted only after explicit user opt-in."
+    },
+    {
+      "id": "firefox.consent.implicit",
+      "title": "Data Consent - Implicit consent for self-evident, single-use add-ons",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Implicit consent only applies to single-use, self-evident add-ons that meet all five Mozilla conditions."
+    },
+    {
+      "id": "firefox.consent.technicalOptOut",
+      "title": "Data Consent - Technical & interaction data is opt-out",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Allow users to disable technical/interaction telemetry without losing core features."
+    },
+    {
+      "id": "firefox.privacy.noLeakLocal",
+      "title": "Privacy - No leaking local/user-specific info to web or native apps",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not expose local data via DOM, postMessage, or native messaging."
+    },
+    {
+      "id": "firefox.privacy.noPrivateBrowsingStore",
+      "title": "Privacy - Private browsing data must not be stored",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not persist data captured in private browsing windows or expose cross-container identifiers."
+    },
+    {
+      "id": "firefox.monetization.adInjection",
+      "title": "Monetization - Injected ads must be clearly identified",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Any ad injected into web content must be clearly attributed to your add-on."
+    },
+    {
+      "id": "firefox.monetization.noCryptoMining",
+      "title": "Monetization - No cryptocurrency miners",
+      "category": "advertising",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "coinhive|cryptonight|webminer|coin-hive|cryptoloot|minero|coinimp",
+        "flags": "gi"
+      },
+      "fix": "Remove all cryptocurrency miners from the add-on."
+    },
+    {
+      "id": "firefox.monetization.noAffiliateInjection",
+      "title": "Monetization - No silent affiliate redirect/injection",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not modify web content or redirects to insert affiliate tags. Affiliate links inside the add-on UI are OK."
+    },
+    {
+      "id": "firefox.reported.minifiedSource",
+      "title": "Reported rejection: minified/transpiled code without source-code submission",
+      "category": "reported-rejection",
+      "severity": "error",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Submit original source plus build instructions via the AMO source-code submission form when you ship bundled/minified output."
+    },
+    {
+      "id": "firefox.reported.thirdPartyLib",
+      "title": "Reported rejection: third-party library shipped without upstream URL/version",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "For each bundled library, document name, version and origin URL in source-submission notes so reviewers can diff against upstream."
+    },
+    {
+      "id": "firefox.reported.evalAndNew",
+      "title": "Reported rejection: dynamic code execution (eval / new Function / setTimeout-string)",
+      "category": "reported-rejection",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "\\beval\\s*\\(|\\bnew\\s+Function\\s*\\(|setTimeout\\s*\\(\\s*['\"]",
+        "flags": "g"
+      },
+      "fix": "Replace eval/new Function with statically declared code. Pass functions, not strings, to setTimeout/setInterval."
+    },
+    {
+      "id": "firefox.reported.remoteScript",
+      "title": "Reported rejection: loading remote scripts / WASM not bundled",
+      "category": "reported-rejection",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "document\\.createElement\\(\\s*['\"]script['\"]\\s*\\)|importScripts\\s*\\(|<script[^>]+src\\s*=\\s*['\"]https?:",
+        "flags": "gi"
+      },
+      "fix": "Bundle every script, worker, and wasm file inside the .xpi. AMO blocks add-ons that fetch executable code at runtime."
+    },
+    {
+      "id": "firefox.reported.consentSearchHijack",
+      "title": "Reported rejection: changes search engine / homepage / new tab without explicit consent",
+      "category": "reported-rejection",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "chrome_url_overrides|chrome_settings_overrides",
+        "flags": "g"
+      },
+      "fix": "Surface a clear opt-in dialog before overriding new-tab, homepage, or search defaults. Provide a one-click revert."
+    },
+    {
+      "id": "firefox.reported.dataCollection",
+      "title": "Reported rejection: undisclosed telemetry / data collection",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "(?:google-analytics|googletagmanager|mixpanel|segment\\.com|sentry-cdn|amplitude\\.com|/collect\\?)",
+        "flags": "gi"
+      },
+      "fix": "Disclose all data collection in the listing and obtain explicit user consent. Mozilla rejects silent analytics."
+    },
+    {
+      "id": "firefox.reported.broadOriginsXhr",
+      "title": "Reported rejection: cross-origin XHR/fetch beyond declared host permissions",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Match every fetch/XHR origin to a declared host permission and justify it in the AMO listing."
+    }
+  ],
+  "reportedRejectionsAdded": 7,
+  "reportedRejectionsSources": [
+    "https://developer.chrome.com/docs/webstore/troubleshooting",
+    "https://developer.chrome.com/docs/webstore/program-policies/",
+    "https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/store-policies/developer-policies",
+    "https://extensionworkshop.com/documentation/publish/add-on-policies/",
+    "https://extensionworkshop.com/documentation/publish/source-code-submission/",
+    "https://developer.apple.com/app-store/review/guidelines/"
+  ]
+}

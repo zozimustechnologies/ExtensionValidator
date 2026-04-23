@@ -1,0 +1,75 @@
+{
+  "name": "zozimus-extension-validator",
+  "displayName": "Zozimus Extension Validator",
+  "description": "Validate browser extension packages against Edge, Chrome, Firefox, and Safari store policies — plus your own custom definitions.",
+  "version": "0.1.0",
+  "publisher": "zozimustechnologies",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Linters", "Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "icon": "media/icon.png",
+  "repository": { "type": "git", "url": "https://github.com/zozimustechnologies" },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "zozimusValidator",
+          "title": "Zozimus Extension Validator",
+          "icon": "media/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "zozimusValidator": [
+        {
+          "type": "webview",
+          "id": "zozimusValidator.sidebar",
+          "name": "Validator",
+          "icon": "media/sidebar-icon.svg",
+          "contextualTitle": "Zozimus Extension Validator"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "zozimus.refreshPolicies",
+        "title": "Zozimus: Refresh Browser Store Policies"
+      },
+      {
+        "command": "zozimus.validatePackage",
+        "title": "Zozimus: Validate Extension Package"
+      }
+    ],
+    "configuration": {
+      "title": "Zozimus Extension Validator",
+      "properties": {
+        "zozimus.refreshIntervalDays": {
+          "type": "number",
+          "default": 30,
+          "minimum": 1,
+          "description": "How often (in days) to automatically refresh browser store policies."
+        },
+        "zozimus.autoRefresh": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically refresh policies on the configured interval."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@types/adm-zip": "^0.5.5",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10"
+  }
+}

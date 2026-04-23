@@ -1,0 +1,362 @@
+{
+  "browser": "safari",
+  "source": "https://developer.apple.com/app-store/review/guidelines/",
+  "secondarySource": "https://developer.apple.com/documentation/safariservices/safari-web-extensions",
+  "lastUpdated": "2026-04-23T00:00:00Z",
+  "policyCount": 31,
+  "note": "Subset of App Store Review Guidelines that apply to Safari Web Extensions packaged inside a containing app, plus Safari-specific 4.4 extension rules.",
+  "policies": [
+    {
+      "id": "safari.1.6",
+      "title": "1.6 Data Security - implement appropriate security measures",
+      "category": "security",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Implement secure handling of user information and prevent unauthorized access by third parties."
+    },
+    {
+      "id": "safari.2.1",
+      "title": "2.1 App Completeness - submit final, fully-functional builds",
+      "category": "quality",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove placeholder content. Ensure URLs, in-app purchases, and demo accounts work for the reviewer."
+    },
+    {
+      "id": "safari.2.3.1",
+      "title": "2.3.1 Accurate Metadata - no hidden or undocumented features",
+      "category": "metadata",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Document every feature in the App Review notes; do not ship hidden or dormant functionality."
+    },
+    {
+      "id": "safari.2.3.7",
+      "title": "2.3.7 Unique app name and accurate keywords",
+      "category": "metadata",
+      "severity": "warning",
+      "check": {
+        "type": "manifestField",
+        "field": "name",
+        "exists": true,
+        "maxLength": 30
+      },
+      "fix": "Choose a unique app name (<=30 chars). Do not stuff trademarks or popular app names into metadata."
+    },
+    {
+      "id": "safari.2.3.10",
+      "title": "2.3.10 Focus on Apple platforms - no other-platform branding",
+      "category": "metadata",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove names, icons, or imagery of other mobile platforms or alternative app marketplaces from metadata."
+    },
+    {
+      "id": "safari.2.5.1",
+      "title": "2.5.1 Use only public APIs on the current shipping OS",
+      "category": "code",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Use public Apple APIs only. Phase out deprecated frameworks."
+    },
+    {
+      "id": "safari.2.5.2",
+      "title": "2.5.2 Self-contained - no remote code execution",
+      "category": "code",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "eval\\s*\\(|new\\s+Function\\s*\\(|importScripts\\s*\\(\\s*['\"]https?:|document\\.write\\s*\\(",
+        "flags": "g"
+      },
+      "fix": "Bundle every script in the package. Apple disallows downloading executable code at runtime."
+    },
+    {
+      "id": "safari.2.5.3",
+      "title": "2.5.3 No malware, viruses, or disruptive code",
+      "category": "security",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Confirm no malware or code that disrupts the OS, hardware, push notifications, or Game Center."
+    },
+    {
+      "id": "safari.2.5.6",
+      "title": "2.5.6 Web browsing must use WebKit",
+      "category": "code",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Apps that browse the web must use WebKit and WebKit JavaScript (entitlements required for alternatives)."
+    },
+    {
+      "id": "safari.2.5.14",
+      "title": "2.5.14 Recording requires explicit user consent and indicator",
+      "category": "privacy",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "desktopCapture",
+          "tabCapture",
+          "audioCapture",
+          "videoCapture"
+        ]
+      },
+      "fix": "Request explicit consent and provide a visible/audible indication when recording user activity."
+    },
+    {
+      "id": "safari.4.2",
+      "title": "4.2 Minimum Functionality - more than a webpage wrapper",
+      "category": "quality",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Provide meaningful, lasting utility beyond a repackaged website."
+    },
+    {
+      "id": "safari.4.3",
+      "title": "4.3 Spam - no near-duplicates, saturated categories",
+      "category": "quality",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not submit duplicate or near-duplicate apps; differentiate via in-app purchase variations instead."
+    },
+    {
+      "id": "safari.4.4",
+      "title": "4.4 Extensions - host app must comply with extension docs",
+      "category": "extension",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Comply with the Safari Web Extensions documentation; disclose extensions in marketing text."
+    },
+    {
+      "id": "safari.4.4.2",
+      "title": "4.4.2 Safari extensions - run on current Safari, no malicious content, narrow website access",
+      "category": "extension",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "<all_urls>"
+        ]
+      },
+      "fix": "Limit host permissions to specific origins. Safari extensions must not claim more website access than necessary."
+    },
+    {
+      "id": "safari.4.5.4",
+      "title": "4.5.4 Push Notifications - opt-in, not required for function",
+      "category": "ux",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Push notifications must be opt-in; do not use them for promotions without explicit consent and an opt-out."
+    },
+    {
+      "id": "safari.5.1.1.i",
+      "title": "5.1.1(i) Privacy Policy - link in App Store Connect and in-app",
+      "category": "privacy",
+      "severity": "warning",
+      "check": {
+        "type": "manifestField",
+        "field": "homepage_url",
+        "exists": true
+      },
+      "fix": "Provide a privacy policy URL in the manifest and the App Store listing; describe data collected and retention."
+    },
+    {
+      "id": "safari.5.1.1.ii",
+      "title": "5.1.1(ii) Permission - secure user consent for any data collection",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Secure user consent for any user/usage data collection, even if anonymized."
+    },
+    {
+      "id": "safari.5.1.1.iii",
+      "title": "5.1.1(iii) Data Minimization - collect only what is needed",
+      "category": "privacy",
+      "severity": "warning",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "navigator\\.geolocation|cookies\\.get|history\\.search|tabs\\.query|identity\\.getProfileUserInfo",
+        "flags": "g"
+      },
+      "fix": "Request only data relevant to the core functionality. Use share sheets/pickers instead of broad access where possible."
+    },
+    {
+      "id": "safari.5.1.1.v",
+      "title": "5.1.1(v) Account Sign-In - allow use without an account where possible; offer in-app account deletion",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not require login for non-account features; if accounts are supported, provide in-app deletion."
+    },
+    {
+      "id": "safari.5.1.2",
+      "title": "5.1.2 Data Use and Sharing - explicit consent for sharing/tracking",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Obtain explicit ATT permission for tracking and disclose all third-party sharing."
+    },
+    {
+      "id": "safari.5.1.4",
+      "title": "5.1.4 Kids - no third-party analytics/ads in kids apps",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "If targeted at kids, comply with COPPA/GDPR-K and remove third-party analytics/ads (limited exceptions)."
+    },
+    {
+      "id": "safari.5.1.5",
+      "title": "5.1.5 Location Services - only when directly relevant",
+      "category": "privacy",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "geolocation"
+        ]
+      },
+      "fix": "Request geolocation only when needed for a disclosed feature; explain purpose in your purpose string."
+    },
+    {
+      "id": "safari.5.2.1",
+      "title": "5.2.1 Intellectual Property - originals or licensed content only",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Use only content you created or are licensed to use; legal entity submitter must own/license rights."
+    },
+    {
+      "id": "safari.5.2.3",
+      "title": "5.2.3 Audio/Video Downloading - no unauthorized downloads",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not save/convert/download media from third-party services without explicit authorization."
+    },
+    {
+      "id": "safari.5.6",
+      "title": "5.6 Developer Code of Conduct - no manipulation, fraud, or harassment",
+      "category": "ethics",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Treat customers and Apple respectfully. Repeated manipulative behavior leads to program removal."
+    },
+    {
+      "id": "safari.reported.2.5.2.remote",
+      "title": "Reported rejection (App Review 2.5.2): downloading/executing code at runtime",
+      "category": "reported-rejection",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "\\beval\\s*\\(|new\\s+Function\\s*\\(|importScripts\\s*\\(\\s*['\"]https?:|document\\.write\\s*\\(",
+        "flags": "g"
+      },
+      "fix": "Apple rejects extensions that load executable code from a remote source. Bundle and statically declare every script."
+    },
+    {
+      "id": "safari.reported.4.4.2.allUrls",
+      "title": "Reported rejection (App Review 4.4.2): Safari extension requests access to all websites",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "<all_urls>",
+          "*://*/*",
+          "http://*/*",
+          "https://*/*"
+        ]
+      },
+      "fix": "Limit host_permissions to the specific origins where your extension provides functionality. Document why each origin is required."
+    },
+    {
+      "id": "safari.reported.5.1.1.privacyPolicy",
+      "title": "Reported rejection (App Review 5.1.1): privacy policy missing or does not cover the extension",
+      "category": "reported-rejection",
+      "severity": "error",
+      "check": {
+        "type": "manifestField",
+        "field": "homepage_url",
+        "exists": true
+      },
+      "fix": "Provide a privacy policy URL in App Store Connect AND inside the app. The policy must explicitly describe data collected by the Safari extension."
+    },
+    {
+      "id": "safari.reported.2.3.10.otherPlatforms",
+      "title": "Reported rejection (App Review 2.3.10): metadata mentions other browsers / platforms",
+      "category": "reported-rejection",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Strip references to Chrome, Firefox, Edge, Android, etc. from screenshots, description, and in-app UI for the App Store build."
+    },
+    {
+      "id": "safari.reported.4.2.minimumFunctionality",
+      "title": "Reported rejection (App Review 4.2): containing app does little beyond enabling the extension",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Ensure the macOS/iOS containing app has standalone value (settings, onboarding, account management) — not just an \"Enable in Safari\" button."
+    },
+    {
+      "id": "safari.reported.consentTracking",
+      "title": "Reported rejection (App Tracking Transparency): tracking without ATT prompt",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "(?:facebook\\.net/.*fbevents|google-analytics|googletagmanager|/collect\\?|mixpanel|amplitude|segment\\.com)",
+        "flags": "gi"
+      },
+      "fix": "If the extension or containing app tracks users across other companies’ apps/sites, present the ATT prompt and respect the response."
+    }
+  ],
+  "reportedRejectionsAdded": 6,
+  "reportedRejectionsSources": [
+    "https://developer.chrome.com/docs/webstore/troubleshooting",
+    "https://developer.chrome.com/docs/webstore/program-policies/",
+    "https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/store-policies/developer-policies",
+    "https://extensionworkshop.com/documentation/publish/add-on-policies/",
+    "https://extensionworkshop.com/documentation/publish/source-code-submission/",
+    "https://developer.apple.com/app-store/review/guidelines/"
+  ]
+}

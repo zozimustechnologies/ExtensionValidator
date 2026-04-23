@@ -1,0 +1,623 @@
+{
+  "browser": "edge",
+  "source": "https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/store-policies/developer-policies",
+  "lastUpdated": "2026-04-23T00:00:00Z",
+  "policyCount": 56,
+  "policies": [
+    {
+      "id": "edge.1.1.1",
+      "title": "1.1.1 Extensions must have a single purpose",
+      "category": "product/quality",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Ensure your extension has a single, narrow function. Bundling unrelated features will be rejected."
+    },
+    {
+      "id": "edge.1.1.2",
+      "title": "1.1.2 Describe your extension accurately",
+      "category": "product/metadata",
+      "severity": "warning",
+      "check": {
+        "type": "manifestField",
+        "field": "description",
+        "exists": true,
+        "minLength": 12,
+        "maxLength": 132
+      },
+      "fix": "Provide a clear, accurate description (12-132 chars). Do not impersonate other companies or extensions."
+    },
+    {
+      "id": "edge.1.1.3",
+      "title": "1.1.3 Functionality - no broken URLs or blocked links",
+      "category": "product/quality",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Verify every URL/link the extension uses works and is not blocked."
+    },
+    {
+      "id": "edge.1.1.4",
+      "title": "1.1.4 Search and discovery - <=7 relevant search terms",
+      "category": "product/metadata",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "In Partner Center, list at most 7 unique search terms relevant to your extension."
+    },
+    {
+      "id": "edge.1.1.5",
+      "title": "1.1.5 Provide appropriate listing details",
+      "category": "product/metadata",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Make the listing distinctive and informative about functionality."
+    },
+    {
+      "id": "edge.1.1.6",
+      "title": "1.1.6 Stability and performance",
+      "category": "product/quality",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Test for crashes, freezes, and excessive resource use before submission."
+    },
+    {
+      "id": "edge.1.1.7",
+      "title": "1.1.7 No obfuscated code",
+      "category": "code",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "_0x[a-f0-9]{4,}|atob\\(\\s*['\"][A-Za-z0-9+/=]{200,}['\"]",
+        "flags": "gi"
+      },
+      "fix": "Ship readable, reviewable source. Minification is allowed; obfuscation that hides intent is not."
+    },
+    {
+      "id": "edge.1.1.8",
+      "title": "1.1.8 No silent altering of browser settings",
+      "category": "product/ux",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "chromeSettingsOverrides",
+          "homepage",
+          "search_provider",
+          "startup_pages"
+        ]
+      },
+      "fix": "Disclose any change to homepage / search provider / new tab and require explicit user consent."
+    },
+    {
+      "id": "edge.1.2.1",
+      "title": "1.2.1 Content Security Policy",
+      "category": "security",
+      "severity": "error",
+      "check": {
+        "type": "manifestField",
+        "field": "content_security_policy",
+        "mustNotMatch": "unsafe-eval|http://|https://"
+      },
+      "fix": "Remove unsafe-eval and remote script-src URLs from content_security_policy."
+    },
+    {
+      "id": "edge.1.2.2",
+      "title": "1.2.2 No malware, spyware, or phishing",
+      "category": "security",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Confirm no malicious behavior. Account suspension is permanent if malware is detected."
+    },
+    {
+      "id": "edge.1.2.3",
+      "title": "1.2.3 Disclose dependencies on other software",
+      "category": "security",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Clearly disclose any external dependency required for primary functionality in the description."
+    },
+    {
+      "id": "edge.1.2.4",
+      "title": "1.2.4 Updates only via Partner Center",
+      "category": "security",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "chrome\\.runtime\\.requestUpdateCheck|\"update_url\"\\s*:",
+        "flags": "gi"
+      },
+      "fix": "Do not self-update outside of the Edge Add-ons store."
+    },
+    {
+      "id": "edge.1.3.1",
+      "title": "1.3.1 Provide test user credentials if login is required",
+      "category": "testability",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Add demo credentials in Submission Options > Notes for certification or explain why none can be provided."
+    },
+    {
+      "id": "edge.1.3.2",
+      "title": "1.3.2 Server services must be available during review",
+      "category": "testability",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Keep any backend the extension relies on online during certification."
+    },
+    {
+      "id": "edge.1.4.1",
+      "title": "1.4.1 Compatibility across platforms",
+      "category": "usability",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Detect unsupported devices at launch and show a clear requirements message."
+    },
+    {
+      "id": "edge.1.4.2",
+      "title": "1.4.2 Responsive user experience",
+      "category": "usability",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Ensure prompt startup, responsiveness, and graceful shutdown."
+    },
+    {
+      "id": "edge.1.5.1",
+      "title": "1.5.1 Collect personal information only when necessary",
+      "category": "privacy",
+      "severity": "warning",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "navigator\\.geolocation|cookies\\.get|history\\.search|tabs\\.query|identity\\.getProfileUserInfo",
+        "flags": "g"
+      },
+      "fix": "Collect only what is required for a disclosed user-facing feature, with consent."
+    },
+    {
+      "id": "edge.1.5.2",
+      "title": "1.5.2 Maintain a privacy policy",
+      "category": "privacy",
+      "severity": "warning",
+      "check": {
+        "type": "manifestField",
+        "field": "homepage_url",
+        "exists": true
+      },
+      "fix": "Publish and link a privacy policy specific to your extension and Microsoft Edge."
+    },
+    {
+      "id": "edge.1.5.3",
+      "title": "1.5.3 Sharing data with third parties requires opt-in",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Obtain in-product opt-in consent before sharing user data; never engage in data brokering."
+    },
+    {
+      "id": "edge.1.5.4",
+      "title": "1.5.4 Sharing information of non-users",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Obtain written consent and offer withdrawal for any non-user PII you publish."
+    },
+    {
+      "id": "edge.1.5.5",
+      "title": "1.5.5 Transmit information securely",
+      "category": "security",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "http://(?!localhost|127\\.0\\.0\\.1)",
+        "flags": "g"
+      },
+      "fix": "Use HTTPS for all data transport. Remove plaintext http:// endpoints."
+    },
+    {
+      "id": "edge.1.5.6",
+      "title": "1.5.6 Highly sensitive information requires consent",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Obtain explicit consent before collecting health, financial, or biometric data."
+    },
+    {
+      "id": "edge.1.6",
+      "title": "1.6 Request only necessary permissions",
+      "category": "permissions",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "<all_urls>",
+          "tabs",
+          "debugger",
+          "management",
+          "proxy",
+          "privacy",
+          "history",
+          "bookmarks"
+        ]
+      },
+      "fix": "Drop any permission not actively used. No 'future-proof' permissions allowed."
+    },
+    {
+      "id": "edge.1.7",
+      "title": "1.7 Localize claimed languages",
+      "category": "product/quality",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Localize description and UI in every language the extension claims to support."
+    },
+    {
+      "id": "edge.1.8.1",
+      "title": "1.8.1 Paid features - use third-party purchase API",
+      "category": "monetization",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Use a secure third-party payment API for goods/services. Never convert in-product currency to real money."
+    },
+    {
+      "id": "edge.1.8.2",
+      "title": "1.8.2 Disclose paid features and price ranges",
+      "category": "monetization",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Clearly state in-product purchase types, price ranges, and trial scope/terms."
+    },
+    {
+      "id": "edge.1.9.1",
+      "title": "1.9.1 Notifications follow developer policies",
+      "category": "ux",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "All notification content is subject to the same policies as extension content."
+    },
+    {
+      "id": "edge.1.9.2",
+      "title": "1.9.2 Notifications must identify their source",
+      "category": "ux",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not obscure the originating extension in any notification."
+    },
+    {
+      "id": "edge.1.9.3",
+      "title": "1.9.3 Notifications must not contain confidential data",
+      "category": "privacy",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Strip sensitive content from notifications."
+    },
+    {
+      "id": "edge.1.9.4",
+      "title": "1.9.4 Notifications must relate to the extension",
+      "category": "ux",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not push unrelated promotional messages."
+    },
+    {
+      "id": "edge.1.10.1",
+      "title": "1.10.1 Advertising is not the primary purpose",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Advertising must not be the main content or required to use the extension."
+    },
+    {
+      "id": "edge.1.10.2",
+      "title": "1.10.2 Ad content follows Microsoft Advertising policies",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Comply with Microsoft Advertising policies and the Microsoft Store App Developer Agreement."
+    },
+    {
+      "id": "edge.1.10.3",
+      "title": "1.10.3 Quality of advertising",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Do not interfere with displayed ad visibility/quality; do not exist primarily to drive ad clicks."
+    },
+    {
+      "id": "edge.1.10.4",
+      "title": "1.10.4 Promotion ad campaigns comply with Creative specs",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Ad creatives and landing pages must comply with Microsoft Advertising creative specs."
+    },
+    {
+      "id": "edge.1.10.5",
+      "title": "1.10.5 Notify users of opt-out for interest-based ads",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Disclose interest-based ad data sharing and an opt-out mechanism in your privacy statement."
+    },
+    {
+      "id": "edge.1.10.6",
+      "title": "1.10.6 Children-directed extensions: COPPA compliance",
+      "category": "advertising",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "If directed at <13 year olds, declare in Partner Center and ensure ad content is age appropriate."
+    },
+    {
+      "id": "edge.2.1",
+      "title": "2.1 Content requirements (no objectionable content)",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove discriminatory, harmful, deceptive, or malware content."
+    },
+    {
+      "id": "edge.2.2",
+      "title": "2.2 Names, logos, and licensed third-party content",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Use only original or properly licensed content; respect Microsoft trademarks."
+    },
+    {
+      "id": "edge.2.3.1",
+      "title": "2.3.1 No content facilitating extreme/gratuitous harm",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove content glorifying violence, weapons, or human-rights violations."
+    },
+    {
+      "id": "edge.2.3.2",
+      "title": "2.3.2 Responsibility - no risk of harm",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Provide all required safety warnings and never disable platform safety features."
+    },
+    {
+      "id": "edge.2.4",
+      "title": "2.4 No defamation, libel, or threats",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove defamatory or threatening content."
+    },
+    {
+      "id": "edge.2.5",
+      "title": "2.5 No offensive or discriminatory content",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove content that promotes discrimination, hate, or violence."
+    },
+    {
+      "id": "edge.2.6",
+      "title": "2.6 No glamorization of alcohol, tobacco, or drugs",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove content glamorizing irresponsible substance use."
+    },
+    {
+      "id": "edge.2.7",
+      "title": "2.7 No adult / sexually explicit content",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove pornographic or sexually explicit content and references."
+    },
+    {
+      "id": "edge.2.8",
+      "title": "2.8 Prohibited content, services, and activity",
+      "category": "content",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "coinhive|cryptonight|webminer|coin-hive|cryptoloot|minero|coinimp",
+        "flags": "gi"
+      },
+      "fix": "No gambling facilitation, paywall circumvention, pirated content, or cryptocurrency mining."
+    },
+    {
+      "id": "edge.2.9",
+      "title": "2.9 No facilitation of illegal activity",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove anything that encourages real-world illegal activity."
+    },
+    {
+      "id": "edge.2.10",
+      "title": "2.10 No excessive profanity or obscene content",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Remove gratuitous profanity or obscene material."
+    },
+    {
+      "id": "edge.2.11",
+      "title": "2.11 Country/region-specific content requirements",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Ensure content is acceptable in every targeted country/region."
+    },
+    {
+      "id": "edge.2.12.1",
+      "title": "2.12.1 Mature content rating accuracy",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Mark Mature content honestly in Partner Center."
+    },
+    {
+      "id": "edge.2.12.2",
+      "title": "2.12.2 Ratings change - gate higher-rated content",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Gate content above the assigned rating behind a content filter or signed-in account."
+    },
+    {
+      "id": "edge.2.13",
+      "title": "2.13 Promotional videos follow content policies",
+      "category": "content",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Ensure any submitted promotional video complies with all content policies."
+    },
+    {
+      "id": "edge.reported.descTooShort",
+      "title": "Reported rejection: short description must be substantive (Edge Add-ons)",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "manifestField",
+        "field": "description",
+        "exists": true,
+        "minLength": 25
+      },
+      "fix": "Expand the description to clearly state what the extension does and the value to the user. One-word descriptions are routinely rejected."
+    },
+    {
+      "id": "edge.reported.remoteCodeFetch",
+      "title": "Reported rejection: extension fetches and executes remote JavaScript",
+      "category": "reported-rejection",
+      "severity": "error",
+      "check": {
+        "type": "sourcePattern",
+        "pattern": "fetch\\(\\s*['\"]https?://[^'\"\\s]+\\.js['\"]|new\\s+Function\\s*\\(|eval\\s*\\(",
+        "flags": "g"
+      },
+      "fix": "Bundle all executable code in the package. Edge certification rejects extensions that download/eval JS at runtime."
+    },
+    {
+      "id": "edge.reported.broadHostPermissions",
+      "title": "Reported rejection: requests <all_urls> without justification",
+      "category": "reported-rejection",
+      "severity": "warning",
+      "check": {
+        "type": "permissionsBlocklist",
+        "blocked": [
+          "<all_urls>",
+          "http://*/*",
+          "https://*/*"
+        ]
+      },
+      "fix": "Restrict host permissions to the specific origins your features require, or switch to activeTab + user gesture."
+    },
+    {
+      "id": "edge.reported.minifiedNoSource",
+      "title": "Reported rejection: heavily minified bundles without readable sources",
+      "category": "reported-rejection",
+      "severity": "info",
+      "check": {
+        "type": "manual"
+      },
+      "fix": "Provide unminified source or a build script in the developer notes so reviewers can audit the code."
+    },
+    {
+      "id": "edge.reported.iconQuality",
+      "title": "Reported rejection: low-quality / generic / placeholder icon",
+      "category": "reported-rejection",
+      "severity": "info",
+      "check": {
+        "type": "manifestField",
+        "field": "icons",
+        "exists": true
+      },
+      "fix": "Provide a distinct, high-resolution icon. Stock or default icons are commonly cited as a rejection reason."
+    }
+  ],
+  "reportedRejectionsAdded": 5,
+  "reportedRejectionsSources": [
+    "https://developer.chrome.com/docs/webstore/troubleshooting",
+    "https://developer.chrome.com/docs/webstore/program-policies/",
+    "https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/store-policies/developer-policies",
+    "https://extensionworkshop.com/documentation/publish/add-on-policies/",
+    "https://extensionworkshop.com/documentation/publish/source-code-submission/",
+    "https://developer.apple.com/app-store/review/guidelines/"
+  ]
+}
