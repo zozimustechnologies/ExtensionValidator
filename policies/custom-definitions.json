@@ -1,3 +1,31 @@
 {
-  "definitions": []
+  "definitions": [
+    {
+      "id": "custom.edge.manifest.descLength132",
+      "browser": "edge",
+      "failureMessage": "manifest.json \"description\" exceeds the Edge Add-ons limit of 132 characters.",
+      "pattern": "\"description\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.){133,}\"",
+      "flags": "",
+      "fix": "Shorten the \"description\" field in manifest.json to 132 characters or fewer. The full marketing description belongs in the store listing, not the manifest.",
+      "createdAt": "2026-04-23T00:00:00Z"
+    },
+    {
+      "id": "custom.edge.manifest.allOfSchema",
+      "browser": "edge",
+      "failureMessage": "JSON does not match all schemas of AllOf - invalid schema indexes",
+      "pattern": "\"manifest_version\"\\s*:\\s*\"\\d+\"|\"web_accessible_resources\"\\s*:\\s*\\[\\s*\"|\"content_security_policy\"\\s*:\\s*\"",
+      "flags": "s",
+      "fix": "Edge Add-ons reports this when manifest.json fails the composite (AllOf) schema. Common causes: (1) \"manifest_version\" is a string instead of the number 3; (2) MV3 \"web_accessible_resources\" is a flat array of paths instead of [{ \"resources\": [...], \"matches\": [...] }]; (3) \"content_security_policy\" is a string (MV2) in an MV3 manifest - it must be an object { \"extension_pages\": \"...\" }; (4) \"background\" mixes MV2 \"scripts\" with MV3 \"service_worker\". Fix each to match MV3 exactly, then re-submit.",
+      "createdAt": "2026-04-23T00:00:01Z"
+    },
+    {
+      "id": "custom.edge.manifest.invalidSchemaIndexes",
+      "browser": "edge",
+      "failureMessage": "invalid schema indexes",
+      "pattern": "\"host_permissions\"\\s*:\\s*\"[^\\[]|\"icons\"\\s*:\\s*\\{\\s*\"[A-Za-z]",
+      "flags": "s",
+      "fix": "\"invalid schema indexes\" means one or more fields failed their sub-schema. Check: \"permissions\" must only list API names (\"<all_urls>\" belongs in \"host_permissions\"); \"host_permissions\" must be an array of match patterns, not a single string; \"icons\" keys must be numeric strings (\"16\", \"48\", \"128\"); every \"matches\" / \"include_globs\" / \"exclude_globs\" must be an array. Validate your manifest against the Chrome MV3 JSON schema before re-submitting.",
+      "createdAt": "2026-04-23T00:00:02Z"
+    }
+  ]
 }
