@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "extension-validator"
+version = "1.0.0"
+description = "Check Edge, Chrome, Firefox, and Safari policies on your browser extension."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = ["browser", "extension", "validator", "chrome", "edge", "firefox", "safari"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Internet :: WWW/HTTP :: Browsers",
+]
+dependencies = []
+
+[project.scripts]
+extension-validator = "extension_validator.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["extension_validator*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

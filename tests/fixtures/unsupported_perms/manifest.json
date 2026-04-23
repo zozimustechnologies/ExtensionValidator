@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Unsupported Perms Extension",
+  "version": "1.0.0",
+  "permissions": ["storage", "certificateProvider", "webRequest", "debugger"],
+  "host_permissions": [],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "48": "icons/icon48.png"
+  }
+}
