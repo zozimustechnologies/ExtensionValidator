@@ -4,12 +4,32 @@
   "description": "Validate browser extension packages against Edge, Chrome, Firefox, and Safari store policies — plus your own custom definitions.",
   "version": "0.1.0",
   "publisher": "zozimustechnologies",
+  "license": "MIT",
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Linters", "Other"],
+  "keywords": [
+    "browser extension",
+    "chrome",
+    "edge",
+    "firefox",
+    "safari",
+    "web store",
+    "add-on",
+    "policy",
+    "validator",
+    "manifest"
+  ],
   "activationEvents": ["onStartupFinished"],
   "main": "./out/extension.js",
   "icon": "media/icon.png",
-  "repository": { "type": "git", "url": "https://github.com/zozimustechnologies" },
+  "homepage": "https://zozimustechnologies.github.io/ExtensionValidator/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zozimustechnologies/ExtensionValidator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zozimustechnologies/ExtensionValidator/issues"
+  },
   "contributes": {
     "viewsContainers": {
       "activitybar": [
